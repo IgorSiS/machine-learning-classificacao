@@ -1,22 +1,24 @@
+# -*- coding: utf-8 
 import csv
 
 def carregar_acessos():
+	
+    X = []
+    Y = []
 
-	X = []
-	Y = []
+    arquivo = open('acesso.csv', 'rb')
+    leitor = csv.reader(arquivo)
 
-	arquivo = open('acesso.csv', 'rb')
-	leitor = csv.reader(arquivo)
+    next(leitor)
 
-	leitor.next()
+    for home,como_funciona,contato, comprou in leitor:
 
-	for home,como_funciona,contato,comprou in leitor:
- 
- 		dado = [int(home), int(como_funciona), int(contato)]
-		X.append(dado)
-		Y.append(int(comprou))
+        dado = [int(home),int(como_funciona)
+            ,int(contato)]
+        X.append(dado)
+        Y.append(int(comprou))
 
-	return X, Y
+    return X, Y
 
 def carregar_buscas():
 

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 
+#O algoritmo base(algoritmo burro) precisa ser testado sempre com o elemento que mais aparece, ou 1 ou 0  e etc...
 from collections import Counter
 import pandas as pd
 
@@ -5,21 +7,39 @@ import pandas as pd
 # home, busca
 # home, logado
 # busca, logado
-# busca: 85.71% (7 testes)
+# busca: 85.71% (7 testes) Esse resultado vai servrir para mostrar no relatório.
 
-df = pd.read_csv('busca2.csv')
+#Data frame ser lido
+df = pd.read_csv('busca.csv')
 
+#separa o data frame
 X_df = df[['home', 'busca', 'logado']]
 Y_df = df['comprou']
 
-Xdummies_df = pd.get_dummies(X_df)
+
+#Processou os dammies, apenas para valores qualitativo
+Xdummies_df = pd.get_dummies(X_df) # São variaveis que a gente colocar para preencher o espaço de outro qur a gente tinh feito, por exemplo 'Algoritmo'
 Ydummies_df = Y_df
 
+#Pega os valores do dataFrame e transforma em array
 X = Xdummies_df.values
 Y = Ydummies_df.values
 
+#Treinado e Testando meu algoritimo
 
+#90% de treino 10% de teste
+tamanho_de_treino = int(0.9 * len(Y)) #900 90%	
+tamanho_de_teste  = int(len(Y) - tamanho_de_treino) #100
 
+#90% iniciais
+treino_dados = X[:tamanho_de_treino] # 900 primeiros
+treino_marcacoes = Y[:tamanho_de_treino] #100
+
+#10% finais
+teste_dados = X[-tamanho_de_teste:]
+teste_marcacoes = Y[-tamanho_de_teste:]
+
+# print(treino_dados)
 
 porcentagem_de_treino = 0.8
 porcentagem_de_teste = 0.1
@@ -79,14 +99,6 @@ taxa_de_acerto = 100.0 * total_de_acertos / total_de_elementos
 
 msg = "Taxa de acerto do vencedor entre os dois algoritmos no mundo real: {0}".format(taxa_de_acerto)
 print(msg)
-
-
-
-
-
-
-
-
 
 
 
